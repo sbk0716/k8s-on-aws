@@ -20,5 +20,6 @@ module "k8s-vpc" {
   tags = {
     Terraform = "true"
     Environment = "dev"
+    SystemId = "k8s"
   }
 }

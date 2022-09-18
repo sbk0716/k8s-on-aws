@@ -60,14 +60,16 @@ The connection to the server localhost:8080 was refused - did you specify the ri
 ```
 
 # 3. Build VPC using Terraform
-* Execute the following command in the `terraform` directory.
+* Execute the `terraform <subcommand>` command in the `terraform` directory.
 
 FYI:
 https://www.terraform.io/cli/commands
 
 ```sh
+% cd terraform
 # The `terraform init` command performs several different initialization steps
 # in order to prepare the current # working directory for use with Terraform.
+% 
 % terraform init
 
 Initializing modules...
