@@ -2,6 +2,7 @@
 # Define terraform-aws-modules/vpc/aws
 # https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest
 # ================================================================================
+# Module block to call a locally or remotely stored module
 module "k8s-vpc" {
   source = "terraform-aws-modules/vpc/aws"
   # version = "3.14.4"
@@ -14,12 +15,12 @@ module "k8s-vpc" {
   public_subnets  = ["10.0.101.0/24", "10.0.102.0/24"]
 
   enable_nat_gateway = true
-  single_nat_gateway = true     # Use one NAT GW to reduce costs.
-  enable_vpn_gateway = false    # VPN GW is not necessary
+  single_nat_gateway = true  # Use one NAT GW to reduce costs.
+  enable_vpn_gateway = false # VPN GW is not necessary
 
   tags = {
-    Terraform = "true"
+    Terraform   = "true"
     Environment = "dev"
-    SystemId = "k8s"
+    SystemId    = "k8s"
   }
 }
