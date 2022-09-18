@@ -3,6 +3,7 @@
 * Install AWS CLI
 
 # 1. Install Terraform with Homebrew on macOS
+FYI:
 https://learn.hashicorp.com/tutorials/terraform/install-cli
 
 ```sh
@@ -34,6 +35,7 @@ Warning: hashicorp/tap/terraform 1.2.9 already installed
 ```
 
 # 2. Install kubectl with Homebrew on macOS
+FYI:
 https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#install-with-homebrew-on-macos
 
 ```sh
@@ -57,8 +59,85 @@ The connection to the server localhost:8080 was refused - did you specify the ri
 % 
 ```
 
-# 3. zzz
+# 3. Build VPC using Terraform
+* Execute the following command in the `terraform` directory.
+
+FYI:
+https://www.terraform.io/cli/commands
 
 ```sh
+# The `terraform init` command performs several different initialization steps
+# in order to prepare the current # working directory for use with Terraform.
+% terraform init
 
+Initializing modules...
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using previously-installed hashicorp/aws v4.31.0
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+% 
+% ls -a
+.                       .gitignore              .terraform.lock.hcl     modules
+..                      .terraform              main.tf
+% 
+# The `terraform plan` command creates an execution plan,
+# which lets you preview the changes that Terraform plans to make to your infrastructure.
+% terraform plan -json | jq -r '.' > terraform-plan-output.json
+% 
+% ls | grep terraform-plan-output.json
+terraform-plan-output.json
+% 
+# The terraform apply command executes the actions proposed in a Terraform plan.
+% terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+...
+...
+Plan: 16 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+module.k8s-vpc.module.k8s-vpc.aws_eip.nat[0]: Creating...
+...
+...
+module.k8s-vpc.module.k8s-vpc.aws_route.private_nat_gateway[0]: Creation complete after 1s [id=r-rtb-06050378aeb063c441080289494]
+
+Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
+% 
+```
+## Appendix: terraform destroy
+
+```sh
+% terraform destroy
+...
+...
+Plan: 0 to add, 0 to change, 16 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: 
+
+Destroy cancelled.
+admin@gw-mac terraform % 
 ```
