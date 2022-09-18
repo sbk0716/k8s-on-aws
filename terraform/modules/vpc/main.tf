@@ -1,10 +1,8 @@
 # ================================================================================
-# terraform-aws-modules/vpc/aws
-# Terraform module which creates VPC resources on AWS
-# 
+# Define terraform-aws-modules/vpc/aws
 # https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest
 # ================================================================================
-module "vpc" {
+module "k8s-vpc" {
   source = "terraform-aws-modules/vpc/aws"
   # version = "3.14.4"
 
