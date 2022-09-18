@@ -10,10 +10,20 @@
 ```sh
 % tree -d
 .
+├── README.md
 ├── history
+│   └── build-eks.md            <- Describe the work history.
 └── terraform
+    ├── main.tf                 <- Describe module definitions for creating resources.
+    └── modules
+        ├── eks
+        │   ├── main.tf         <- Describe module definitions for creating resources related to EKS.
+        │   └── variables.tf    <- Variables that are inputs to the module (like function arguments).
+        └── vpc
+            ├── main.tf         <- Describe module definitions for creating resources related to VPC.
+            └── outputs.tf      <- Variables that output the results of the module (like the return value of a function)
 
-2 directories
+5 directories, 7 files
 % 
 ```
 
