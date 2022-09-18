@@ -126,9 +126,13 @@ module.k8s-vpc.module.k8s-vpc.aws_route.private_nat_gateway[0]: Creation complet
 Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
 % 
 ```
-## Appendix: terraform destroy
+## Appendix: terraform validate/destroy
 
 ```sh
+% terraform validate
+Success! The configuration is valid.
+
+% 
 % terraform destroy
 ...
 ...
