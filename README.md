@@ -2,9 +2,8 @@
 * Building Kubernetes cluster on AWS cloud using Terraform.
 
 ## (1)Project Features
-* aaa
-* bbb
-* ccc
+* Building VPC resources using Terraform
+* Building EKS resources using Terraform
 
 ## (2)Project Structure
 ```sh

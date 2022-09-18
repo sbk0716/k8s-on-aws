@@ -59,7 +59,7 @@ The connection to the server localhost:8080 was refused - did you specify the ri
 % 
 ```
 
-# 3. Build VPC using Terraform
+# 3. Building VPC resources using Terraform
 * Execute the `terraform <subcommand>` command in the `terraform` directory.
 
 FYI:
