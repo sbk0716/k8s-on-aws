@@ -8,9 +8,9 @@ module "k8s-vpc" {
 # ================================================================================
 # Import terraform-aws-modules/eks/aws
 # ================================================================================
-# module "eks" {
-#     source = "./modules/eks"
+module "eks" {
+  source = "./modules/eks"
 
-#     vpc_id          = module.vpc.vpc_id
-#     private_subnets = module.vpc.private_subnets
-# }
+  vpc_id          = module.k8s-vpc.vpc_id
+  private_subnets = module.k8s-vpc.private_subnets
+}

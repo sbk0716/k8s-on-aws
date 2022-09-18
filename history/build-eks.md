@@ -145,5 +145,40 @@ Do you really want to destroy all resources?
   Enter a value: 
 
 Destroy cancelled.
-admin@gw-mac terraform % 
+% 
 ```
+
+
+# 2. Building EKS resources using Terraform
+* Execute the `terraform <subcommand>` command in the `terraform` directory.
+
+FYI:
+https://www.terraform.io/cli/commands
+
+```sh
+% cd terraform
+# The `terraform init` command performs several different initialization steps
+# in order to prepare the current # working directory for use with Terraform.
+% 
+% terraform init -upgrade 
+Upgrading modules...
+...
+...
+Initializing the backend...
+...
+...
+
+Initializing provider plugins...
+...
+...
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+% 
