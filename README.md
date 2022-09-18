@@ -19,7 +19,7 @@
         │   └── variables.tf    <- Variables that are inputs to the module (like function arguments).
         └── vpc
             ├── main.tf         <- Describe module definitions for creating resources related to VPC.
-            └── outputs.tf      <- Variables that output the results of the module (like the return value of a function)
+            └── outputs.tf      <- Describe variables that output the results of the module (like the return value of a function)
 ```
 
 # 2. Usage
@@ -40,12 +40,9 @@
 
 ```sh
 % aws eks --region ap-northeast-1 update-kubeconfig --name sample-cluster
-% 
-% cat ~/.kube/config | head -n 3
-apiVersion: v1
-clusters:
-- cluster:
-% 
+% kubectl get namespaces
+% kubectl cluster-info
+% kubectl get node
 ```
 
 ## Appendix: Cleaning up AWS resources using Terraform
