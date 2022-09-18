@@ -3,11 +3,11 @@
 # https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest
 # ================================================================================
 # Module block to call a locally or remotely stored module
-module "k8s-vpc" {
+module "sample-vpc" {
   source = "terraform-aws-modules/vpc/aws"
   # version = "3.14.4"
 
-  name = "k8s-vpc"
+  name = "sample-vpc"
   cidr = "10.0.0.0/16"
 
   azs             = ["ap-northeast-1a", "ap-northeast-1c"]
@@ -21,6 +21,6 @@ module "k8s-vpc" {
   tags = {
     Terraform   = "true"
     Environment = "dev"
-    SystemId    = "k8s"
+    SystemId    = "sample"
   }
 }

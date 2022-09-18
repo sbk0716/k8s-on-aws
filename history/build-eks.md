@@ -149,7 +149,7 @@ Destroy cancelled.
 ```
 
 
-# 2. Building EKS resources using Terraform
+# 4. Building EKS resources using Terraform
 * Execute the `terraform <subcommand>` command in the `terraform` directory.
 
 FYI:
@@ -182,3 +182,34 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 % 
+% 
+% terraform plan -json | jq -r '.' > terraform-plan-output.json
+% terraform apply
+...
+...
+Apply complete! Resources: 47 added, 0 changed, 0 destroyed.
+% 
+```
+
+# 5. Confirmation of Kubernetes operation
+
+FYI:
+https://catalog.us-east-1.prod.workshops.aws/workshops/f5abb693-2d87-43b5-a439-77454f28e2e7/ja-JP/030-explore-cluster
+
+```sh
+% aws eks --region ap-northeast-1 update-kubeconfig --name sample-cluster
+Updated context arn:aws:eks:ap-northeast-1:140722552536:cluster/sample-cluster in /Users/admin/.kube/config
+% 
+% cat ~/.kube/config | head -n 3
+apiVersion: v1
+clusters:
+- cluster:
+% 
+% kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   18m
+kube-node-lease   Active   18m
+kube-public       Active   18m
+kube-system       Active   18m
+% 
+```

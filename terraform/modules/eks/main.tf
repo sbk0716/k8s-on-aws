@@ -1,13 +1,13 @@
 # A data block requests that Terraform read from a given data source
 # and export the result under the given local name.
 data "aws_eks_cluster" "cluster" {
-  name = module.k8s-cluster.cluster_id
+  name = module.sample-cluster.cluster_id
 }
 
 # A data block requests that Terraform read from a given data source
 # and export the result under the given local name.
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.k8s-cluster.cluster_id
+  name = module.sample-cluster.cluster_id
 }
 
 # A provider block is used to specify a provider configuration
@@ -43,21 +43,27 @@ terraform {
 # https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest
 # ================================================================================
 # Module block to call a locally or remotely stored module
-module "k8s-cluster" {
+module "sample-cluster" {
   source = "terraform-aws-modules/eks/aws"
   # version = "18.29.0"
 
-  cluster_name    = "k8s-cluster"
-  cluster_version = "~> 1.20"
-  subnets         = var.private_subnets
+  cluster_name    = "sample-cluster"
+  cluster_version = "1.23"
+  subnet_ids      = var.private_subnets
   vpc_id          = var.vpc_id
 
-  node_groups = {
-    my-nodegroup = {
+  eks_managed_node_groups = {
+    sample-nodegroup = {
       desired_capacity = 2
       max_capacity     = 4
       min_capacity     = 2
       instance_types   = ["t3.small"]
     }
+  }
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+    SystemId    = "sample"
   }
 }
