@@ -160,7 +160,7 @@ https://www.terraform.io/cli/commands
 # The `terraform init` command performs several different initialization steps
 # in order to prepare the current # working directory for use with Terraform.
 % 
-% terraform init -upgrade 
+% terraform init -upgrade
 Upgrading modules...
 ...
 ...
@@ -198,7 +198,6 @@ https://catalog.us-east-1.prod.workshops.aws/workshops/f5abb693-2d87-43b5-a439-7
 
 ```sh
 % aws eks --region ap-northeast-1 update-kubeconfig --name sample-cluster
-Updated context arn:aws:eks:ap-northeast-1:140722552536:cluster/sample-cluster in /Users/admin/.kube/config
 % 
 % cat ~/.kube/config | head -n 3
 apiVersion: v1
