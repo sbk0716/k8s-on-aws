@@ -1,2 +1,7 @@
+# Terraform
 .terraform/
 .terraform.lock.hcl
+terraform.tfstate
+
+# customize
+terraform-plan-output.json
