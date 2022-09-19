@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: getting-started
-        image: dummy-image-url
+        image: 140722552536.dkr.ecr.ap-northeast-1.amazonaws.com/getting-started:'develop-755cf79'
         ports:
         - containerPort: 8080
