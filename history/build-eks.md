@@ -213,9 +213,10 @@ kube-system       Active   18m
 % 
 ```
 
-# 7. Install ArgoCD
+# 6. Install ArgoCD
 FYI:
 https://argo-cd.readthedocs.io/en/stable/getting_started/#1-install-argo-cd
+https://www.eksworkshop.com/intermediate/290_argocd/
 
 ```sh
 % brew install argocd
