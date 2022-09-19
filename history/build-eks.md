@@ -212,3 +212,63 @@ kube-public       Active   18m
 kube-system       Active   18m
 % 
 ```
+
+# 6. Install ArgoCD
+FYI:
+https://argo-cd.readthedocs.io/en/stable/getting_started/#1-install-argo-cd
+https://www.eksworkshop.com/intermediate/290_argocd/
+
+```sh
+% brew install argocd
+% which argocd
+/opt/homebrew/bin/argocd
+% kubectl create namespace argocd
+namespace/argocd created
+% kubectl get namespaces
+NAME              STATUS   AGE
+argocd            Active   4s
+default           Active   7m56s
+kube-node-lease   Active   7m59s
+kube-public       Active   7m59s
+kube-system       Active   7m59s
+% 
+% kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+...
+...
+% kubectl get pods -n argocd 
+NAME                                               READY   STATUS    RESTARTS   AGE
+argocd-application-controller-0                    1/1     Running   0          61s
+argocd-applicationset-controller-bf6bf659d-vbfzj   1/1     Running   0          61s
+argocd-dex-server-787dcc5fd7-lfx28                 1/1     Running   0          61s
+argocd-notifications-controller-78cffff85c-mvmvg   1/1     Running   0          61s
+argocd-redis-65596bf87-pc58z                       1/1     Running   0          61s
+argocd-repo-server-5444cd8878-9j5fm                1/1     Running   0          61s
+argocd-server-6b567b5949-7wr2j                     1/1     Running   0          61s
+% kubectl get services -n argocd
+NAME                                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+argocd-applicationset-controller          ClusterIP   172.20.66.62     <none>        7000/TCP,8080/TCP            68s
+argocd-dex-server                         ClusterIP   172.20.94.34     <none>        5556/TCP,5557/TCP,5558/TCP   68s
+argocd-metrics                            ClusterIP   172.20.218.86    <none>        8082/TCP                     68s
+argocd-notifications-controller-metrics   ClusterIP   172.20.175.21    <none>        9001/TCP                     68s
+argocd-redis                              ClusterIP   172.20.152.222   <none>        6379/TCP                     68s
+argocd-repo-server                        ClusterIP   172.20.129.147   <none>        8081/TCP,8084/TCP            68s
+argocd-server                             ClusterIP   172.20.9.254     <none>        80/TCP,443/TCP               68s
+argocd-server-metrics                     ClusterIP   172.20.191.237   <none>        8083/TCP                     68s
+% 
+% kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+service/argocd-server patched
+% 
+% export ARGOCD_SERVER=`kubectl get svc argocd-server -n argocd -o json | jq --raw-output '.status.loadBalancer.ingress[0].hostname'`
+% export ARGO_PWD=`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+% argocd login $ARGOCD_SERVER --username admin --password $ARGO_PWD --insecure
+'admin:login' logged in successfully
+% argocd app list
+NAME  CLUSTER  NAMESPACE  PROJECT  STATUS  HEALTH  SYNCPOLICY  CONDITIONS  REPO  PATH  TARGET
+% kubectl apply -f manifest/nginx-ingress-controller.yaml
+application.argoproj.io/nginx created
+% 
+% argocd app list                                        
+NAME   CLUSTER                         NAMESPACE  PROJECT  STATUS     HEALTH   SYNCPOLICY  CONDITIONS  REPO                           PATH  TARGET
+nginx  https://kubernetes.default.svc  nginx      default  OutOfSync  Missing  Auto-Prune  <none>      https://helm.nginx.com/stable        0.10.0
+% 
+```
