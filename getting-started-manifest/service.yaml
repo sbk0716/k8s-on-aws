@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: getting-started-service
+  labels:
+    app: getting-started
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: getting-started
+  type: ClusterIP
+status:
+  loadBalancer: {}
