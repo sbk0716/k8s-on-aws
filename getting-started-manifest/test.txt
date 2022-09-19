@@ -1,0 +1,1 @@
+host: my-load-balancer.elb.amazonaws.com
